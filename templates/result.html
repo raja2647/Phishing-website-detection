@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        .safe { color: green; }
+        .warning { color: darkorange; }
+        .danger { color: red; }
+        .section-title { margin-top: 30px; }
+    </style>
+
+</head>
+<body>
+    <section id="result" class="section">
+        <div class="result">
+            <h1>Scan Results</h1>
+            {% if url_result %}
+            <dl class="result-table">
+                <dt>URL</dt><dd>{{ url_result.url }}</dd>
+                <dt>Phishing Result</dt><dd>{{ url_result.phishing_status }}</dd>
+                <dt>URL Length</dt><dd>{{ url_result.url_length }} characters</dd>
+                <dt>SHA-256 Hash</dt><dd>{{ url_result.sha_hash }}</dd>
+                <dt>HTTPS</dt><dd>{{ 'Yes' if url_result.is_https else 'No' }}</dd>
+                <dt>Domain</dt><dd>{{ url_result.domain }}</dd>
+                <dt>Keyword Warning</dt>
+                <dd>
+                    {% if url_result.contains_keywords %}
+                        URL contains suspicious keywords (e.g., 'login', 'secure', etc.).
+                    {% else %}
+                        No suspicious keywords found in the URL.
+                    {% endif %}
+                </dd>
+             {% endif %}
+        
+             {% if file_result %}
+             <h2 class="section-title">File Analysis</h2>
+            <p><strong>File Path:</strong> {{ file_path }}</p>
+            <p><strong>File Name:</strong> {{ file_name }}</p>
+
+     
+             {% if 'Potential Malware' in file_result %}
+                 <p class="danger"><strong>Scan Verdict:</strong> {{ file_result }}</p>
+                 <p class="danger"><strong>Warning:</strong> This file shows signs of malicious behavior.</p>
+     
+                 {% if 'Suspicious extension' in file_result %}
+                     <p class="warning">⚠ File has a suspicious or executable extension.</p>
+                 {% endif %}
+                 {% if 'Double extension' in file_result %}
+                     <p class="warning">⚠ File uses a misleading double extension.</p>
+                 {% endif %}
+                 {% if 'Unusually small file' in file_result %}
+                     <p class="warning">⚠ File is unusually small for its type, may be suspicious.</p>
+                 {% endif %}
+                 {% if 'MIME type mismatch' in file_result %}
+                     <p class="warning">⚠ File type does not match the expected MIME type.</p>
+                 {% endif %}
+             {% elif file_result == 'File Seems Safe' %}
+                 <p class="safe"><strong>Scan Verdict:</strong> {{ file_result }}</p>
+                 <p class="safe"><strong>✅ Good news:</strong> No suspicious characteristics were found in this file.</p>
+             {% else %}
+                 <p><strong>Note:</strong> {{ file_result }}</p>
+             {% endif %}
+            {% endif %}
+            </dl>
+            <div class="button-wrapper">
+                <a href="/" id="check">Back to Home</a>
+            </div>            
+        </div>
+        </section>        
+</body>
+</html>

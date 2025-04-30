@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phishing</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</head>
+<body>
+    <div class="all">
+    <nav>
+        <div class="navbar">
+            <h1>Bait Ops</h1>
+           <div class="items">
+               <a href="#home">Home</a>
+               <a href="#url">URL & File</a>
+               <a href="#report">Reports</a>
+               <a href="#aboutus">About us</a>
+           </div> 
+        </div>
+    </nav>
+    <main>
+    <div class="main">
+    <section id="home" class="section">
+    <div class="homies">
+        <div class="home">
+            <input type="text" id="search-input" placeholder="Search URL..." autocomplete="off">
+            <div id="suggestions" class="suggestions-box"></div>
+        </div>
+     <div class="about">
+        <div class="img">
+            <div class="gradient-border">
+                <div class="gradient-ring"></div>
+              <img src="{{ url_for('static', filename='images/logo.jpg') }}" alt="">
+            </div>
+          </div>          
+        <div class="div">
+        <h1>What is Phishing and How We Help You Stay Safe</h1>
+        <p> Phishing is a sneaky trick that bad people on the internet use to try and steal your personal information. They might send fake emails or messages, or create websites that look real, but are actually designed to fool you into giving away things like your password or bank account details. Sometimes, these fake messages even hide harmful files called malware, which can damage your computer or steal your data.
+            To stay safe online, never click on links from strangers, always double-check if a website looks real, and ask a trusted adult if you’re unsure.
+            That’s where our website comes in! We help you:</p>
+            <li>Check if a link is safe</li>
+            <li>See if a file might be dangerous</li>
+            <li>Spot phishing scams and malware </li>
+            <p> We're here to help you explore the internet safely and smartly!</p>
+        </div>
+      </div>
+    </div>
+    </section>
+    <section id="url" class="section"> 
+    <div class="url">
+        <h1>URL and File Checker</h1>
+        <form action="/check" method="post" enctype="multipart/form-data">
+            <label>Enter URL:</label>
+            <input type="text" name="url">
+            <label>Upload File:</label>
+            <input type="file" name="file">
+            <input type="submit" value="Check" id="check">
+        </form>
+    </div>
+    </section>
+    <section id="report" class="section"> 
+    <div class="report">
+        <h2>Previous Scan Reports</h2>
+        {% if reports %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>URL</th>
+                        <th>Status</th>
+                        <th>Domain</th>
+                        <th>HTTPS</th>
+                        <th>Length</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for report in reports %}
+                    <tr>
+                        <td>{{ report.url }}</td>
+                        <td>{{ report.phishing_status }}</td>
+                        <td>{{ report.domain }}</td>
+                        <td>{{ 'Yes' if report.is_https else 'No' }}</td>
+                        <td>{{ report.url_length }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No scan reports yet.</p>
+        {% endif %}
+    </div>
+    </section>
+    <section id="aboutus" class="section">
+        <div class="aboutus-content">
+          <h1>🛡 About Us</h1>
+          <p>Welcome to Bait Ops! 🎣💻<br>
+            “If the internet is an ocean, we help you spot the sharks!” 🦈🌐</p>
+      
+          <h2>🚨 What We Do:</h2>
+          <ul>
+            <li>We sniff out phishing (those sneaky fake emails and websites).</li>
+            <li>We stop malware (the nasty bugs that break your computer).</li>
+            <li>We help YOU learn how to stay safe online – the fun way!</li>
+          </ul>
+      
+          <h2>🌍 Why We Exist:</h2>
+          <p>Because everyone – from your grandma to your little cousin – deserves to be safe online! We want to make sure no one falls for fake messages or scary viruses. Cyber safety is for everyone, and we’re here to make it simple, smart, and even a little silly. 😉</p>
+      
+          <h2>🎯 Our Mission:</h2>
+          <p>“To turn everyday internet users into cyber ninjas!” 🥷💻<br>
+          We believe that learning about cybersecurity should be as easy as ABC and as fun as your favorite cartoon.</p>
+      
+          <h2>🤝 Join the Bait Ops Crew!</h2>
+          <p>Whether you're 5 or 95, you're welcome here. Let’s beat the bad guys, learn something cool, and laugh a little along the way.<br>
+          “Stay sharp, stay safe, and don’t take the bait!” 🐟🔒</p>
+        </div>
+      </section> 
+    </div>
+    </main>
+   </div>
+</body>
+</html>

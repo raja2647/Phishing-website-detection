@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Full Scan Report</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            background-color: #ede0d4;
+            font-family: 'Segoe UI', sans-serif;
+            padding: 40px;
+            color: #4b2e2e;
+        }
+
+        .report-container {
+            background-color: #fff;
+            border-left: 8px solid #9c6644;
+            border-radius: 10px;
+            padding: 30px;
+            max-width: 700px;
+            margin: 75px auto;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+
+        .report-container h1 {
+            color: #9c6644;
+            margin-bottom: 20px;
+        }
+
+        .report-container p {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
+        .back {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 10px 18px;
+            background-color: #9c6644;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .back:hover {
+            background-color: #7c4e36;
+        }
+    </style>
+</head>
+<body>
+    <div class="report-container">
+        <h1>🔍 Scan Report</h1>
+        <p><strong>URL:</strong> {{ report.url }}</p>
+        <p><strong>Domain:</strong> {{ report.domain }}</p>
+        <p><strong>HTTPS Enabled:</strong> {{ 'Yes' if report.is_https else 'No' }}</p>
+        <p><strong>URL Length:</strong> {{ report.url_length }}</p>
+        <p><strong>Contains Phishing Keywords:</strong> {{ 'Yes' if report.contains_keywords else 'No' }}</p>
+        <p><strong>SHA Hash:</strong> {{ report.sha_hash }}</p>
+        <p><strong>Phishing Status:</strong> {{ report.phishing_status }}</p>
+
+        <a class="back" href="{{ url_for('index') }}">← Back to Home</a>
+    </div>
+</body>
+</html>
