@@ -14,7 +14,8 @@
             <h1>BAIT OPS</h1>
            <div class="items">
                <a href="#home">Home</a>
-               <a href="#url">URL & File</a>
+               <a href="#url">URL</a>
+               <a href="#file">FILE</a>
                <a href="#report">Reports</a>
                <a href="#aboutus">About us</a>
            </div> 
@@ -54,6 +55,14 @@
         <form action="/check" method="post" enctype="multipart/form-data">
             <label>Enter URL:</label>
             <input type="text" name="url">
+            <input type="submit" value="Check" id="check">
+        </form>
+    </div>
+    </section>
+    <section id="file" class="section"> 
+    <div class="url">
+        <h1>File Checker</h1>
+        <form action="/check" method="post" enctype="multipart/form-data">
             <label>Upload File:</label>
             <input type="file" name="file">
             <input type="submit" value="Check" id="check">
