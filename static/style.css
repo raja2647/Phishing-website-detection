@@ -9,7 +9,8 @@ body {
     min-height: 97vh; 
     animation: gradientMove 15s ease infinite;
     color: white;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: hidden;
     height: 100vh;
     margin: 0;
     padding: 0;
@@ -39,6 +40,7 @@ body {
     flex: 0 0 100vw;
     height: 100vh;
     scroll-snap-align: start;
+    margin-top: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -56,10 +58,6 @@ body {
     height: 70px;             
     z-index: 1000;            
     padding: 0 20px; 
-}
-.navbar img{
-   width: 150px;
-   height: 120px;
 }
 .navbar h1{
     margin-top: 25px;
@@ -115,6 +113,8 @@ body {
     width: 100%;
     max-width: 700px;
     margin: auto;
+    align-items: center;
+    justify-content: center;
 }
 
 #search-input {
@@ -142,7 +142,7 @@ body {
     width: 100%;
     background-color: #fefae0;
     border: none;
-    z-index: 1;
+    z-index: 3;
     max-height: 200px;
     overflow-y: auto;
     font-size: 14px;
@@ -259,6 +259,7 @@ body {
 .url input[type="file"] {
     padding: 12px 20px;
     border-radius: 25px;
+    width: 100%;
     border: none;
     outline: none;
     background-color: #222;
@@ -397,4 +398,116 @@ table th, table td {
 .aboutus-content ul {
     padding-left: 20px;
 }
-  
+
+@media (max-width: 576px){
+    .navbar{
+        display: block;
+        align-items: center;
+        position: fixed;  
+    }
+    .navbar h1{
+        text-align: center;
+    }
+    .items{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .items a{
+        font-size: 15px;
+        margin: 15px;
+        position: relative;
+    }
+    .items a.active {
+        color: #00ffff;
+    }
+    .main{
+        display: block;
+        flex-direction: column;
+        overflow-x: none;
+        scroll-snap-type: y mandatory;
+        width: 100vw;
+        height: 100vh;
+    }
+    .homies{
+        padding: 20px;
+        border-radius: 30px;
+        margin-top: 70px;
+        height: 62vh;
+        overflow: scroll;
+        scrollbar-width: none; 
+        -ms-overflow-style: none;
+     }
+    .home {
+        width: 100%;
+        height: 10vh;
+        max-width: none;
+        margin: auto;
+        align-items: grid;
+        place-items: center;
+        display: block;
+    }
+    .about{
+        display: block;
+        padding: 10px;
+    }
+    .url form {
+        min-width: auto;
+        width: 90%;
+    }
+    .section {
+        flex: 0 0 100vw;
+        height: 100vh;
+        display: flex;
+    }
+    #search-input {
+        width: 100%;
+        padding: 10px 14px;
+        font-size: 16px;
+    }    
+    .img{
+        margin-left: 60px;
+        align-items: center;
+        justify-content: center;
+        display: flex;
+    }
+    
+    .gradient-border {
+        width: 300px;
+        height: 260px;
+      }
+      
+      .gradient-ring {
+        width: 310px;
+        height: 270px;
+        top: -5px;
+        left: -6px;
+      }
+      
+      .gradient-border img {
+        width: 300px;
+        height: 290px;
+      }
+      #url {
+        padding: 30px;
+    }
+    .report{
+        padding: 20px;
+        width: 100%;
+        height: 70vh;
+        overflow: scroll;
+        scrollbar-width: none; 
+        -ms-overflow-style: none;
+        margin: auto;
+    }
+    .aboutus-content{
+       max-width: 900px;
+       width: 100%;
+       padding: 10px 50px;
+       height: 70vh;
+        overflow: scroll;
+        scrollbar-width: none; 
+        -ms-overflow-style: none;
+        margin: auto;
+    }
+}
