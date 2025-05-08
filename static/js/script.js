@@ -5,19 +5,38 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function updateActiveLink() {
         sections.forEach((section, i) => {
-            const sectionLeft = section.offsetLeft;
-            const sectionWidth = section.offsetWidth;
-            const scrollLeft = main.scrollLeft;
-            
-            if (scrollLeft >= sectionLeft - sectionWidth / 2 && scrollLeft < sectionLeft + sectionWidth / 2) {
+            let isActive = false;
+
+            // For horizontal scrolling (desktop view)
+            if (main.scrollWidth > main.clientWidth) {
+                const sectionLeft = section.offsetLeft;
+                const sectionWidth = section.offsetWidth;
+                const scrollLeft = main.scrollLeft;
+
+                if (scrollLeft >= sectionLeft - sectionWidth / 2 && scrollLeft < sectionLeft + sectionWidth / 2) {
+                    isActive = true;
+                }
+            }
+            // For vertical scrolling (mobile view)
+            else {
+                const rect = section.getBoundingClientRect();
+                if (rect.top >= 0 && rect.top < window.innerHeight / 2) {
+                    isActive = true;
+                }
+            }
+
+            // Apply active class
+            if (isActive) {
                 navLinks.forEach(link => link.classList.remove("active"));
-                navLinks[i].classList.add("active");
+                navLinks[i]?.classList.add("active");
             }
         });
     }
 
-    updateActiveLink(); 
+    updateActiveLink();
+
     main.addEventListener("scroll", updateActiveLink);
+    window.addEventListener("scroll", updateActiveLink); // For mobile view where page scrolls vertically
 });
 
 document.addEventListener("DOMContentLoaded", function () {
